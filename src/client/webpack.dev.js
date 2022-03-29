@@ -1,6 +1,7 @@
 const { merge } = require('webpack-merge')
 const common = require('./webpack.common.js')
 const path = require('path');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = merge(common, {
     mode: 'development',
@@ -11,4 +12,11 @@ module.exports = merge(common, {
         },
         hot: true,
     },
+    plugins: [
+        new CopyPlugin({
+          patterns: [
+            { from: path.join(__dirname, './skull'), to: path.join(__dirname, '../../dist/client/skull') },
+          ],
+        }),
+      ],
 })
